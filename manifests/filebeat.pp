@@ -5,7 +5,7 @@ class beats::filebeat (
   $prospectors   = {},
   $registry_file = '/var/lib/filebeat/registry',
   $spool_size    = 1024,
-  $version_v5    = false,
+  $version_v5    = $beats::version_v5,
 ){
 
   if ($ensure == 'absent'){
