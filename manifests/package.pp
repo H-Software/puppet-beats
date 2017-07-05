@@ -9,8 +9,17 @@ class beats::package (
         ensure => installed,
       }
 
+      case $::operatingsystem {
+        'Ubuntu': {
+          $geoip_package_name='geoip-database'
+        }
+        default: {
+          $geoip_package_name='geoip-database-contrib'
+        }
+      }
+
       if $beats::manage_geoip {
-        package { 'geoip-database-contrib':
+        package { $geoip_package_name:
           ensure => latest,
         }
       }

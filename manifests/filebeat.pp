@@ -45,13 +45,19 @@ class beats::filebeat (
         }
       }
     }
-    default: {
+    'Debian': {
+
+      include ::apt
       include ::apt::update
 
       package {'filebeat':
         ensure  => $ensure,
         require => Class['apt::update'],
       }
+
+    }
+    default: {
+      fail("${::osfamily} not supported yet")
     }
   }
 
