@@ -10,7 +10,7 @@ class beats::package (
       }
 
       if $beats::manage_geoip {
-        if versioncmp($::operatingsystemmajrelease, '7') == 0) {
+        if (versioncmp($::operatingsystemmajrelease, '7') == 0) {
           $geoip_pkg_name = 'geoip-database-contrib'
         }
         else{
