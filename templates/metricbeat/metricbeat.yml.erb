@@ -11,6 +11,8 @@ metricbeat.modules:
      - <%= values %>
 
 <%- end -%>
+<%- else -%>
+  <%= value %>: <%= params %>
 <%- end -%>
 <%- end -%>
 <%- end -%>
