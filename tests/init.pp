@@ -14,7 +14,7 @@ class { '::beats':
   outputs_deep_merge => false,
   outputs_logstash   => {
     'filebeat' => { 'hosts' => [ 'logstash.example.com:5044' ], },
-    'topbeat'  => { 'hosts' => [ 'logstash.example.com:5044' ], },
+    'metricbeat'  => { 'hosts' => [ 'logstash.example.com:5044' ], },
   },
 }
 

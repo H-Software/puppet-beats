@@ -18,7 +18,7 @@ class { '::beats':
                       "ssl_certificate" => '/etc/ssl/certs/logstash-forwarder.crt',
                       "ssl_key" => '/etc/ssl/private/logstash-forwarder.key',
     },
-    'topbeat'  => { 'hosts' => [ 'logstash.example.com:5044' ], },
+    'metricbeat'  => { 'hosts' => [ 'logstash.example.com:5044' ], },
   },
 }
 
