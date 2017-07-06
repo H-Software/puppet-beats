@@ -13,22 +13,16 @@
 class { '::beats':
   outputs_deep_merge => false,
   outputs_logstash   => {
-    'filebeat' => { 'hosts' => [ 'logstash.example.com:5044' ],
-                      "use_tls" => true,
-                      "certificate_authorities" => ['/etc/ssl/certs/logstash-forwarder.crt'],
-                      "ssl_certificate" => '/etc/ssl/certs/logstash-forwarder.crt',
-                      "ssl_key" => '/etc/ssl/private/logstash-forwarder.key',
+    'filebeat' => { 'hosts' => [ 'logstash.example.com:5044' ], 
+                    'use_tls' => true,
     },
     'metricbeat'  => { 'hosts' => [ 'logstash.example.com:5044' ], 
-                      "use_tls" => true,
-                      "certificate_authorities" => ['/etc/ssl/certs/logstash-forwarder.crt'],
-                      "ssl_certificate" => '/etc/ssl/certs/logstash-forwarder.crt',
-                      "ssl_key" => '/etc/ssl/private/logstash-forwarder.key',
+                    'use_tls' => true,
     },
   },
 }
 
-#include ::beats::metricbeat
+#include ::beats::topbeat
 class { '::beats::metricbeat':
 }
 
@@ -47,3 +41,4 @@ class { '::beats::filebeat':
               },
     },
 }
+
