@@ -19,7 +19,7 @@ class { '::beats':
 }
 
 #include ::beats::topbeat
-class { '::beats::topbeat':
+class { '::beats::metricbeat':
 }
 
 #include ::beats::filebeat
