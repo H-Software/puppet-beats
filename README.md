@@ -9,7 +9,11 @@ GPL v2
 
 This module is under development. Most things work most of the time, mostly. 
 Some protocols and settings are still missing. 
-*Minimally tested on Debian-flavour systems. Filebeats tested on RedHat/CentOS 6/7*
+
+* Filebeats tested on CentOS 6/7
+
+* Minimally tested on Debian 7-9, Ubuntu 16.04
+  * Debian 7 needs enable contrib repo (or disable manage_geoip)
 
 ## Example Use ##
 ```

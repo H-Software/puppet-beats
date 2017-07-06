@@ -26,13 +26,17 @@ class beats::topbeat (
         require => Yumrepo['elastic-beats'],
       }
     }
-    default: {
+    'Debian': {
+      include ::apt
       include ::apt::update
 
       package {'topbeat':
         ensure  => $ensure,
         require => Class['apt::update'],
       }
+    }
+    default: {
+      fail("${::osfamily} not supported yet")
     }
   }
 

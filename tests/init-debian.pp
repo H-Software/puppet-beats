@@ -13,7 +13,11 @@
 class { '::beats':
   outputs_deep_merge => false,
   outputs_logstash   => {
-    'filebeat' => { 'hosts' => [ 'logstash.example.com:5044' ], },
+    'filebeat' => { 'hosts' => [ 'logstash.example.com:5044' ], 
+                      "certificate_authorities" => ['/etc/ssl/certs/logstash-forwarder.crt'],
+                      "ssl_certificate" => '/etc/ssl/certs/logstash-forwarder.crt',
+                      "ssl_key" => '/etc/ssl/private/logstash-forwarder.key',
+    },
     'topbeat'  => { 'hosts' => [ 'logstash.example.com:5044' ], },
   },
 }
