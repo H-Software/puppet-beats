@@ -10,13 +10,13 @@ GPL v2
 * This module is under development. Most things work most of the time, mostly. 
 Some protocols and settings are still missing. 
 
-* From module version 0.10 are unsupported beats < v5.x
+* From module version 0.10.0 are unsupported beats < v5.x
 
 ## COMPATIBILITY ##
 
-* Filebeats tested on CentOS 6/7
+* Filebeats tested on CentOS 6 with puppet 3.8.7, CentOS 7 with puppet 4.10
 
-* Minimally tested on Debian 7-9, Ubuntu 16.04
+* Minimally tested on Debian 7-9, Ubuntu 16.04 and puppet 3.8.7
 
   * Debian 7 needs enable contrib repo (or disable manage_geoip)
 
@@ -69,7 +69,7 @@ class { 'beats::filebeat':
 
 ```
 include ::beats
-include ::beats::topbeat
+include ::beats::metricbeat
 include ::beats::filebeat
 ```
 
@@ -93,7 +93,7 @@ include ::beats::filebeat
       "localhost:5044"
     ]
   },
-  "topbeat": {
+  "metricbeat": {
     "hosts": [
       "localhost:5044"
     ]
