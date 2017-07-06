@@ -65,6 +65,22 @@ class { 'beats::filebeat':
 }
 ```
 
+```
+class {'beats::metricbeat':
+  modules  => {
+                 'system' => { 'metricsets' => [ 'cpu', 'load', 'core', 'diskio', 'filesystem', 'memory', 'process'],
+                                   'enabled'  => true,
+                                   'period'   => '10s',
+                                   'processes' => "['.*']",
+                 },
+                 'nginx' => { 'metricsets' => ["nginx_stat"],
+                                   'enabled'  => true,
+                                   'period'   => '10s',
+                                   'hosts'    => ["https://127.0.0.1"],
+                 },
+              },
+}
+```
 ## Example Use with hiera ##
 
 ```
