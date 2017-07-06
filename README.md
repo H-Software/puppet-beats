@@ -7,8 +7,12 @@ GPL v2
 
 ## WARNING ##
 
-This module is under development. Most things work most of the time, mostly. 
+* This module is under development. Most things work most of the time, mostly. 
 Some protocols and settings are still missing. 
+
+* From module version 0.10 are unsupported beats < v5.x
+
+## COMPATIBILITY ##
 
 * Filebeats tested on CentOS 6/7
 
