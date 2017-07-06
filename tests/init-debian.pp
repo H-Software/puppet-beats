@@ -39,5 +39,6 @@ class { '::beats::filebeat':
                                 "/var/log/zabbix/zabbix_agentd2.log",
                               ],
               },
+    },
 }
 
