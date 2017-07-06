@@ -1,5 +1,5 @@
-# Topbeat class
-class beats::topbeat (
+# metricbeat class
+class beats::metricbeat (
   $ensure           = present,
   $period           = 10,
   $procs            = ['.*'],
@@ -16,12 +16,12 @@ class beats::topbeat (
     $service_ensure = $beats::ensure
     $service_enable = $beats::enable
 
-    include ::beats::topbeat::config
+    include ::beats::metricbeat::config
   }
 
   case $::osfamily {
     'RedHat': {
-      package {'topbeat':
+      package {'metricbeat':
         ensure  => $ensure,
         require => Yumrepo['elastic-beats'],
       }
@@ -30,7 +30,7 @@ class beats::topbeat (
       include ::apt
       include ::apt::update
 
-      package {'topbeat':
+      package {'metricbeat':
         ensure  => $ensure,
         require => Class['apt::update'],
       }
@@ -40,15 +40,15 @@ class beats::topbeat (
     }
   }
 
-  service { 'topbeat':
+  service { 'metricbeat':
     ensure => $service_ensure,
     enable => $service_enable,
   }
 
   if ($ensure != 'absent'){
-    Package['topbeat'] -> Class['beats::topbeat::config'] ~> Service['topbeat']
+    Package['metricbeat'] -> Class['beats::metricbeat::config'] ~> Service['metricbeat']
   }
   else{
-    Package['topbeat'] ~> Service['topbeat']
+    Package['metricbeat'] ~> Service['metricbeat']
   }
 }
