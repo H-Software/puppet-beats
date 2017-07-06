@@ -14,7 +14,7 @@ Some protocols and settings are still missing.
 
 ## COMPATIBILITY ##
 
-* Filebeats tested on CentOS 6 with puppet 3.8.7, CentOS 7 with puppet 4.10
+* Filebeats & Metricbeat tested on CentOS 6 with puppet 3.8.7 & CentOS 7 with puppet 4.10
 
 * Minimally tested on Debian 7-9, Ubuntu 16.04 and puppet 3.8.7
 
