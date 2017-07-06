@@ -13,7 +13,10 @@ Some protocols and settings are still missing.
 * Filebeats tested on CentOS 6/7
 
 * Minimally tested on Debian 7-9, Ubuntu 16.04
+
   * Debian 7 needs enable contrib repo (or disable manage_geoip)
+
+  * all Debians needs packages: gnupg, lsb-release
 
 ## Example Use ##
 ```
