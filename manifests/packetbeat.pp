@@ -33,13 +33,17 @@ class beats::packetbeat (
         require => Yumrepo['elastic-beats'],
       }
     }
-    default: {
+    'Debian': {
+      include ::apt
       include ::apt::update
       include ::beats::packetbeat::config
       package {'packetbeat':
         ensure  => $beats::packetbeat::ensure,
         require => Class['apt::update'],
       }
+    }
+    default: {
+      fail("${::osfamily} not supported yet")
     }
   }
   service { 'packetbeat':
