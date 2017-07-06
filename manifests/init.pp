@@ -40,8 +40,12 @@ class beats (
   $mysql_enabled         = false,
   $redis_enabled         = false,
   $manage_geoip          = true,
-  $version_v5            = false,
+  $version_v5            = true,
 ){
+
+  if (any2bool($version_v5) == false){
+    fail("Class['beats']: version_v5 is not true: ${version_v5}")
+  }
 
   if $outputs_deep_merge {
     $_outputs_logstash = hiera_hash('beats::outputs_logstash',{})

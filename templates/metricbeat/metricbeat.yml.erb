@@ -1,0 +1,20 @@
+
+# metricbeat
+metricbeat.modules:
+
+<%- @modules.each do |module_name, module_val| -%>
+- module: <%= module_name %>
+  metricsets:
+<%- module_val.each do |value, params| -%>
+<%- if value == "metricsets" -%>
+<%- params.each do |values| -%>
+     - <%= values %>
+
+<%- end -%>
+<%- else -%>
+  <%= value %>: <%= params %>
+<%- end -%>
+<%- end -%>
+
+<%- end -%>
+

@@ -13,28 +13,23 @@
 class { '::beats':
   outputs_deep_merge => false,
   outputs_logstash   => {
-    'filebeat' => { 'hosts' => [ 'logstash.example.com:5044' ], },
+#    'filebeat' => { 'hosts' => [ 'logstash.example.com:5044' ], },
     'metricbeat'  => { 'hosts' => [ 'logstash.example.com:5044' ], },
   },
 }
 
-#include ::beats::metricbeat
+#include ::beats::topbeat
 class { '::beats::metricbeat':
-}
-
-#include ::beats::filebeat
-class { '::beats::filebeat':
-    prospectors => { 
-              'syslog' => { 
-                  'document_type' => "syslog",
-                  'paths'  => [ "/var/log/syslog",
-                                "/var/log/auth.log",
-                                "/var/log/dpkg.log",
-                                "/var/log/mail.log",
-                                "/var/log/ntp",
-                                "/var/log/zabbix/zabbix_agentd2.log",
-                              ],
+  modules  => {
+                 'system' => { 'metricsets' => [ 'cpu', 'load', 'core', 'diskio', 'filesystem', 'memory', 'process'],
+                                   'enabled'  => true,
+                                   'period'   => '10s',
+                                   'processes' => "['.*']",
+                 },
+                 'nginx' => { 'metricsets' => ["nginx_stat"],
+                                   'enabled'  => true,
+                                   'period'   => '10s',
+                                   'hosts'    => ["https://127.0.0.1"],
+                 },
               },
-    },
 }
-
