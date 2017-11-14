@@ -17,7 +17,7 @@ class beats::repo::apt() {
       'deb'  => true,
     },
     require  => [
-                 apt::key['elasticsearch'],
+                 Apt::Key['elasticsearch'],
                  Package['apt-transport-https'],
                 ],
   }
