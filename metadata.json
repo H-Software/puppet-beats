@@ -3,17 +3,19 @@
   "dependencies": [
     {
       "name": "puppetlabs/apt",
-      "version_requirement": ">= 2.2.1"
+      "version_requirement": ">= 2.2.1 <3.0.0"
     },
     {
-      "name": "puppetlabs/concat"
+      "name": "puppetlabs-concat",
+      "version_requirement": ">=1.2.0 <=4.2.0"
     },
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.10.0"
+      "version_requirement": ">= 4.10.0 <5.0.0"
     },
     {
-      "name": "stschulte/rpmkey"
+      "name": "stschulte/rpmkey",
+      "version_requirement": "1.0.3"
     }
   ],
   "issues_url": "https://github.com/poolski/puppet-beats/issues",
@@ -25,7 +27,14 @@
       "operatingsystemrelease": [
         "6.0",
         "7.0",
-        "8.0"
+        "8.0",
+        "9.0"
+      ]
+    },
+    {
+      "operatingsystem": "ubuntu",
+      "operatingsystemrelease": [
+        "16.04"
       ]
     },
     {
