@@ -11,6 +11,11 @@ env:
   - PUPPET_GEM_VERSION="~> 3.8.7" STRICT_VARIABLES=yes FUTURE_PARSER=yes
 #  - PUPPET_GEM_VERSION="~> 4"
 
+matrix:
+  exclude:
+  - rvm: 2.4.2
+    env: PUPPET_GEM_VERSION="~> 3.8.7" STRICT_VARIABLES=yes FUTURE_PARSER=yes
+
 build:
   pre_ci_boot:
     image_name: czhujer/shippable-c6ruby
