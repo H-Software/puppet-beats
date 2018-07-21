@@ -33,11 +33,16 @@ build:
     - rm Gemfile.lock || true
     - source /etc/profile.d/rvm.sh; rvm use $SHIPPABLE_RUBY
     - source /etc/profile.d/rvm.sh; bundle install $SHIPPABLE_BUNDLER_ARGS
+    # hack for disable monkeypatch in puppet 3.x
 #    - wget https://raw.githubusercontent.com/czhujer/docker-shippable-c6ruby/master/puppet-fix/syck_node_monkeypatch.rb -O /usr/local/rvm/gems/ruby-$SHIPPABLE_RUBY/gems/puppet-3.8.7/lib/puppet/vendor/safe_yaml/lib/safe_yaml/syck_node_monkeypatch.rb || true
 #    - PUPPET=`ls /usr/local/rvm/gems/ruby-$SHIPPABLE_RUBY/gems/puppet* -d|head -1 |awk '{split($0,a,"/"); print a[8]}' |tr '\n' ' ' |tr -d ' '`; wget https://raw.githubusercontent.com/czhujer/docker-shippable-c6ruby/master/puppet-fix/syck_node_monkeypatch.rb -O /usr/local/rvm/gems/ruby-$SHIPPABLE_RUBY/gems/$PUPPET/lib/puppet/vendor/safe_yaml/lib/safe_yaml/syck_node_monkeypatch.rb || true
     - PUPPET=`ls /usr/local/rvm/gems/ruby-$SHIPPABLE_RUBY/gems/puppet* -d|head -1 |awk '{split($0,a,"/"); print a[8]}' |tr '\n' ' ' |tr -d ' '`; [[ $PUPPET =~ ^puppet-3\.[0-9]\. ]] && wget https://raw.githubusercontent.com/czhujer/docker-shippable-c6ruby/master/puppet-fix/syck_node_monkeypatch.rb -O /usr/local/rvm/gems/ruby-$SHIPPABLE_RUBY/gems/$PUPPET/lib/puppet/vendor/safe_yaml/lib/safe_yaml/syck_node_monkeypatch.rb || true
     - rm -f /usr/bin/lsb_release
+    #fix paths for puppet 4
+    - rm -rf /etc/puppetlabs/code/modules; mkdir -p /etc/puppetlabs/code; ln -s /etc/puppet/modules/ /etc/puppetlabs/code/modules
+    # run tests
     - source /etc/profile.d/rvm.sh; bundle exec rake test
+    #check and install puppet modules over r10k
     - source /etc/profile.d/rvm.sh; bundle exec r10k puppetfile check -v
     - source /etc/profile.d/rvm.sh; r10k puppetfile install -v
     - mkdir /etc/puppet/modules/beats
