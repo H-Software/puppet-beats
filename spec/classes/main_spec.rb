@@ -75,7 +75,7 @@ describe 'beats' do
          is_expected.to contain_class('beats::repo::apt').that_comes_before('beats::package')
 
          is_expected.to contain_package('geoip-database-extra').with_ensure('installed')
-         is_expected.to contain_package('apt-transport-https').with_ensure('latest')
+         is_expected.to contain_package('apt-transport-https').with_ensure('installed')
          is_expected.to contain_package('libpcap0.8').with_ensure('installed')
        }
     end
@@ -91,7 +91,7 @@ describe 'beats' do
          is_expected.to contain_class('beats::repo::apt').that_comes_before('beats::package')
 
          is_expected.to contain_package('geoip-database-extra').with_ensure('installed')
-         is_expected.to contain_package('apt-transport-https').with_ensure('latest')
+         is_expected.to contain_package('apt-transport-https').with_ensure('installed')
          is_expected.to contain_package('libpcap0.8').with_ensure('installed')
        }
     end
@@ -110,7 +110,7 @@ describe 'beats' do
          is_expected.to contain_class('beats::repo::apt').that_comes_before('beats::package')
 
          is_expected.to contain_package('geoip-database-extra').with_ensure('installed')
-         is_expected.to contain_package('apt-transport-https').with_ensure('latest')
+         is_expected.to contain_package('apt-transport-https').with_ensure('installed')
          is_expected.to contain_package('libpcap0.8').with_ensure('installed')
        }
     end
