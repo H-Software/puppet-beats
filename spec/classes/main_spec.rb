@@ -64,11 +64,11 @@ describe 'beats' do
   end
 
   context 'Debian operation system' do
-    describe 'beats class without any parameters on Debian' do
+    describe 'beats class without any parameters on Debian 8' do
        let (:facts) {{
          :osfamily                  => 'Debian',
          :lsbdistid                 => 'Debian',
-         :operatingsystemmajrelease => ['8','9']
+         :operatingsystemmajrelease => '8'
        }}
        it {
          is_expected.to contain_class('beats::repo::apt')
@@ -79,6 +79,23 @@ describe 'beats' do
          is_expected.to contain_package('libpcap0.8').with_ensure('installed')
        }
     end
+
+    describe 'beats class without any parameters on Debian 9' do
+       let (:facts) {{
+         :osfamily                  => 'Debian',
+         :lsbdistid                 => 'Debian',
+         :operatingsystemmajrelease => '9'
+       }}
+       it {
+         is_expected.to contain_class('beats::repo::apt')
+         is_expected.to contain_class('beats::repo::apt').that_comes_before('beats::package')
+
+         is_expected.to contain_package('geoip-database-contrib').with_ensure('latest')
+         is_expected.to contain_package('apt-transport-https').with_ensure('latest')
+         is_expected.to contain_package('libpcap0.8').with_ensure('installed')
+       }
+    end
+
   end
 
   context 'Ubuntu operation system' do
@@ -86,7 +103,7 @@ describe 'beats' do
        let (:facts) {{
          :osfamily                  => 'Debian',
          :lsbdistid                 => 'Ubuntu',
-         :operatingsystemmajrelease => ['16.04']
+         :operatingsystemmajrelease => '16.04'
        }}
        it {
          is_expected.to contain_class('beats::repo::apt')
