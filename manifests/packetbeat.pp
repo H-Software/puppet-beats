@@ -50,6 +50,7 @@ class beats::packetbeat (
     ensure => running,
     enable => true,
   }
-  Package['packetbeat'] -> Class['beats::packetbeat::config'] ~>
-  Service['packetbeat']
+  Package['packetbeat']
+  -> Class['beats::packetbeat::config']
+  ~> Service['packetbeat']
 }
