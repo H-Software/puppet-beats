@@ -39,7 +39,7 @@ class beats::filebeat (
           path    => [ '/bin', '/usr/bin', '/usr/local/bin' ],
           command => 'yum update filebeat -y',
           unless  => [
-            'rpm -qa filebeat |grep \'5.[0-9].[0-9]\' |grep "" -c',
+            "rpm -qa filebeat |grep '5.[0-9].[0-9]' |grep \"\" -c",
           ],
           require => Package['filebeat'],
         }
