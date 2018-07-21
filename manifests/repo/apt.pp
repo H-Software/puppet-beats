@@ -4,9 +4,9 @@ class beats::repo::apt() {
   #include apt
 
   apt::key { 'elasticsearch':
-    id          => '46095ACC8548582C1A2699A9D27D666CD88E42B4',
+    id      => '46095ACC8548582C1A2699A9D27D666CD88E42B4',
     source  => 'https://artifacts.elastic.co/GPG-KEY-elasticsearch',
-    require     => Package['apt-transport-https'],
+    require => Package['apt-transport-https'],
   }
 
   apt::source { 'elastic-5.x':
@@ -17,8 +17,8 @@ class beats::repo::apt() {
       'deb'  => true,
     },
     require  => [
-                 Apt::Key['elasticsearch'],
-                 Package['apt-transport-https'],
+                   Apt::Key['elasticsearch'],
+                   Package['apt-transport-https'],
                 ],
   }
 
