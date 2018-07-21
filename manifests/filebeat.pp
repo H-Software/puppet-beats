@@ -70,10 +70,12 @@ class beats::filebeat (
   }
 
   if ($ensure != 'absent'){
-    Package['filebeat'] -> Concat::Fragment['filebeat.header'] ->
-    Beats::Filebeat::Prospector <||> ~> Service['filebeat']
+    Package['filebeat']
+    -> Concat::Fragment['filebeat.header']
+    -> Beats::Filebeat::Prospector <||> ~> Service['filebeat']
   }
   else{
-    Package['filebeat'] ~> Service['filebeat']
+    Package['filebeat']
+    ~> Service['filebeat']
   }
 }
