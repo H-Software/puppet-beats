@@ -31,7 +31,7 @@ class { '::beats::filebeat':
     prospectors => {
               'syslog' => {
                   'document_type' => 'syslog',
-                  'paths'  => [ '/var/log/syslog',
+                  'paths'         => [ '/var/log/syslog',
                                 '/var/log/auth.log',
                                 '/var/log/dpkg.log',
                                 '/var/log/mail.log',
