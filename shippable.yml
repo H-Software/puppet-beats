@@ -28,6 +28,8 @@ build:
 #    - PUPPET=`ls /usr/local/rvm/gems/ruby-$SHIPPABLE_RUBY/gems/puppet* -d|head -1 |awk '{split($0,a,"/"); print a[8]}' |tr '\n' ' ' |tr -d ' '`; wget https://raw.githubusercontent.com/czhujer/docker-shippable-c6ruby/master/puppet-fix/syck_node_monkeypatch.rb -O /usr/local/rvm/gems/ruby-$SHIPPABLE_RUBY/gems/$PUPPET/lib/puppet/vendor/safe_yaml/lib/safe_yaml/syck_node_monkeypatch.rb || true
     - PUPPET=`ls /usr/local/rvm/gems/ruby-$SHIPPABLE_RUBY/gems/puppet* -d|head -1 |awk '{split($0,a,"/"); print a[8]}' |tr '\n' ' ' |tr -d ' '`; [[ $PUPPET =~ ^puppet-3\.[0-9]\. ]] && wget https://raw.githubusercontent.com/czhujer/docker-shippable-c6ruby/master/puppet-fix/syck_node_monkeypatch.rb -O /usr/local/rvm/gems/ruby-$SHIPPABLE_RUBY/gems/$PUPPET/lib/puppet/vendor/safe_yaml/lib/safe_yaml/syck_node_monkeypatch.rb || true
     - rm -f /usr/bin/lsb_release
+    # fix for rspec-puppet autoload
+    - yum install python-pip -y
     - source /etc/profile.d/rvm.sh; bundle exec rake test
     - source /etc/profile.d/rvm.sh; bundle exec r10k puppetfile check -v
     - source /etc/profile.d/rvm.sh; r10k puppetfile install -v
