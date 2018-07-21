@@ -67,7 +67,8 @@ describe 'beats' do
     describe 'beats class without any parameters on Debian' do
        let (:facts) {{
          :osfamily                  => 'Debian',
-         :lsbdistid                 => 'Debian'
+         :lsbdistid                 => 'Debian',
+         :operatingsystemmajrelease => ['8','9']
        }}
        it {
          is_expected.to contain_class('beats::repo::apt')
@@ -84,7 +85,8 @@ describe 'beats' do
     describe 'beats class without any parameters on Ubuntu' do
        let (:facts) {{
          :osfamily                  => 'Debian',
-         :lsbdistid                 => 'Ubuntu'
+         :lsbdistid                 => 'Ubuntu',
+         :operatingsystemmajrelease => ['16.04']
        }}
        it {
          is_expected.to contain_class('beats::repo::apt')
