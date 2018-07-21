@@ -28,15 +28,15 @@ class { '::beats::metricbeat':
 
 #include ::beats::filebeat
 class { '::beats::filebeat':
-    prospectors => { 
-              'syslog' => { 
-                  'document_type' => "syslog",
-                  'paths'  => [ "/var/log/syslog",
-                                "/var/log/auth.log",
-                                "/var/log/dpkg.log",
-                                "/var/log/mail.log",
-                                "/var/log/ntp",
-                                "/var/log/zabbix/zabbix_agentd2.log",
+    prospectors => {
+              'syslog' => {
+                  'document_type' => 'syslog',
+                  'paths'  => [ '/var/log/syslog',
+                                '/var/log/auth.log',
+                                '/var/log/dpkg.log',
+                                '/var/log/mail.log',
+                                '/var/log/ntp',
+                                '/var/log/zabbix/zabbix_agentd2.log',
                               ],
               },
     },

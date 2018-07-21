@@ -26,10 +26,10 @@ class { '::beats::metricbeat':
                                    'period'   => '10s',
                                    'processes' => "['.*']",
                  },
-                 'nginx' => { 'metricsets' => ["nginx_stat"],
+                 'nginx' => { 'metricsets' => ['nginx_stat'],
                                    'enabled'  => true,
                                    'period'   => '10s',
-                                   'hosts'    => ["https://127.0.0.1"],
+                                   'hosts'    => ['https://127.0.0.1'],
                  },
               },
 }
