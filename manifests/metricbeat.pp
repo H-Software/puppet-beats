@@ -1,13 +1,13 @@
 # metricbeat class
 class beats::metricbeat (
-  $ensure           = present,
-  $modules          = {
-                         'system' => { 'metricsets' => [ 'cpu', 'load', 'core'],
-                                       'enabled'  => true,
-                                       'period'   => '10s',
-                                       'processes' => "['.*']",
-                         },
-                      },
+  $ensure  = present,
+  $modules = {
+    'system' => { 'metricsets' => [ 'cpu', 'load', 'core'],
+      'enabled'  => true,
+      'period'   => '10s',
+      'processes' => "['.*']",
+      },
+    },
 ){
 
   if ($ensure == 'absent'){
