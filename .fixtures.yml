@@ -10,6 +10,8 @@ fixtures:
       ref: '1.0.3'
       repo: stschulte/rpmkey
   repositories:
-    stdlib: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
+    stdlib:
+      repo: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
+      ref: "4.25.0"
   symlinks:
     beats: "#{source_dir}"
