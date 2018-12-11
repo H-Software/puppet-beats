@@ -66,7 +66,7 @@ class beats (
         Class['beats::repo::yum'] -> Class['beats::package'] -> Class['beats::config']
       }
       else{
-        ::beats::package, ::beats::config
+        include ::beats::package, ::beats::config
         Class['beats::package'] -> Class['beats::config']
       }
     }
@@ -77,7 +77,7 @@ class beats (
       }
       else{
         include ::beats::package, ::beats::config
-        Class['beats::package'] -> Class['beats::config']    
+        Class['beats::package'] -> Class['beats::config']
       }
     }
     default: {
