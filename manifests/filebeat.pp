@@ -34,7 +34,7 @@ class beats::filebeat (
         require => Yumrepo['elastic-beats'],
       }
 
-      if ($version_v5 == true and ($ensure == present or $ensure == "present")) {
+      if ($ensure == present or $ensure == 'present') {
         exec { 'update package to 5.x':
           path    => [ '/bin', '/usr/bin', '/usr/local/bin' ],
           command => 'yum update filebeat -y',
