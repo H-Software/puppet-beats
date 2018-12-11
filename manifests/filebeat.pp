@@ -18,7 +18,7 @@ class beats::filebeat (
     $service_enable = $beats::enable
   }
 
-  if($manage_repo){
+  if ($manage_repo){
     $require_repo = Yumrepo['elastic-beats']
   }
   else {

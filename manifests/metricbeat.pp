@@ -8,6 +8,7 @@ class beats::metricbeat (
       'processes' => "['.*']",
       },
     },
+  $manage_repo = $beats::manage_repo,
 ){
 
   if ($ensure == 'absent'){
@@ -21,11 +22,18 @@ class beats::metricbeat (
     include ::beats::metricbeat::config
   }
 
+  if ($manage_repo){
+    $require_repo = Yumrepo['elastic-beats']
+  }
+  else {
+    $require_repo = []
+  }
+
   case $::osfamily {
     'RedHat': {
       package {'metricbeat':
         ensure  => $ensure,
-        require => Yumrepo['elastic-beats'],
+        require => $require_repo,
       }
     }
     'Debian': {

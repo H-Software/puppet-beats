@@ -23,14 +23,23 @@ class beats::packetbeat (
   $pgsql_ports               = ['5432'],
   $pgsql_max_rows            = undef,
   $pgsql_max_row_length      = undef,
+  $manage_repo               = $beats::manage_repo,
 ){
 
   case $::osfamily {
     'RedHat': {
       include ::beats::packetbeat::config
+
+      if ($manage_repo){
+        $require_repo = Yumrepo['elastic-beats']
+      }
+      else {
+        $require_repo = []
+      }
+
       package {'packetbeat':
         ensure  => $beats::packetbeat::ensure,
-        require => Yumrepo['elastic-beats'],
+        require => $require_repo,
       }
     }
     'Debian': {
