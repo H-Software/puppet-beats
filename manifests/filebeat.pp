@@ -33,8 +33,6 @@ class beats::filebeat (
         ensure  => $ensure,
         require => Yumrepo['elastic-beats'],
       }
-
-      #if ($ensure == present or $ensure == 'present') {
       
       if ($version_v5 == true and ($ensure == present or $ensure == "present")) {
         exec { 'update package to 5.x':
