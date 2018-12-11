@@ -13,8 +13,8 @@
 class { '::beats':
   outputs_deep_merge => false,
   outputs_logstash   => {
-    'filebeat' => { 'hosts' => [ 'logstash.example.com:5044' ], },
-    'metricbeat'  => { 'hosts' => [ 'logstash.example.com:5044' ], },
+    'filebeat'   => { 'hosts' => [ 'logstash.example.com:5044' ], },
+    'metricbeat' => { 'hosts' => [ 'logstash.example.com:5044' ], },
   },
 }
 
@@ -24,17 +24,16 @@ class { '::beats::metricbeat':
 
 #include ::beats::filebeat
 class { '::beats::filebeat':
-    prospectors => { 
-              'syslog' => { 
-                  'document_type' => "syslog",
-                  'paths'  => [ "/var/log/syslog",
-                                "/var/log/auth.log",
-                                "/var/log/dpkg.log",
-                                "/var/log/mail.log",
-                                "/var/log/ntp",
-                                "/var/log/zabbix/zabbix_agentd2.log",
+    prospectors => {
+              'syslog' => {
+                  'document_type' => 'syslog',
+                  'paths'         => [ '/var/log/syslog',
+                                '/var/log/auth.log',
+                                '/var/log/dpkg.log',
+                                '/var/log/mail.log',
+                                '/var/log/ntp',
+                                '/var/log/zabbix/zabbix_agentd2.log',
                               ],
               },
     },
 }
-

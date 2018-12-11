@@ -3,88 +3,27 @@ language: ruby
 bundler_args: --without development system_tests
 
 rvm:
-# - 1.8.7
-# - 1.9.3
-# - 2.0
-# - 2.1
- - 2.2.0
- - 2.3.1
- - 2.3.2
+ - 2.2.8
+ - 2.3.5
+ - 2.4.2
 
 env:
-#  - PUPPET_GEM_VERSION="~> 2.7.0"
-#  - PUPPET_GEM_VERSION="~> 3.2.0"
-#  - PUPPET_GEM_VERSION="~> 3.3.0"
-#  - PUPPET_GEM_VERSION="~> 3.4.0"
-#  - PUPPET_GEM_VERSION="~> 3.5.0" STRICT_VARIABLES=yes
-#  - PUPPET_GEM_VERSION="~> 3.6.0" STRICT_VARIABLES=yes
-#  - PUPPET_GEM_VERSION="~> 3.7.0" STRICT_VARIABLES=yes
-  - PUPPET_GEM_VERSION="~> 3.8.0" STRICT_VARIABLES=yes FUTURE_PARSER=yes
-#  - PUPPET_GEM_VERSION="~> 4"
+  - PUPPET_GEM_VERSION="~> 3.8.7" STRICT_VARIABLES=yes FUTURE_PARSER=yes
+  - PUPPET_GEM_VERSION="~> 4"
 
 matrix:
   exclude:
-  # Ruby 1.9.3
-  - rvm: 1.9.3
-    env: PUPPET_GEM_VERSION="~> 2.7.0"
-  # Ruby 2.0.0
-  - rvm: 2.0.0
-    env: PUPPET_GEM_VERSION="~> 2.7.0"
-  # Ruby 2.1.0
-  - rvm: 2.1.0
-    env: PUPPET_GEM_VERSION="~> 2.7.0"
-  - rvm: 2.1.0
-    env: PUPPET_GEM_VERSION="~> 3.2.0"
-  - rvm: 2.1.0
-    env: PUPPET_GEM_VERSION="~> 3.3.0"
-  - rvm: 2.1.0
-    env: PUPPET_GEM_VERSION="~> 3.4.0"
-  # Ruby 2.2.0
-  - rvm: 2.2.0
-    env: PUPPET_GEM_VERSION="~> 2.7.0"
-  - rvm: 2.2.0
-    env: PUPPET_GEM_VERSION="~> 3.2.0"
-  - rvm: 2.2.0
-    env: PUPPET_GEM_VERSION="~> 3.3.0"
-  - rvm: 2.2.0
-    env: PUPPET_GEM_VERSION="~> 3.4.0"
-  # Ruby 2.3.1
-  - rvm: 2.3.1
-    env: PUPPET_GEM_VERSION="~> 2.7.0"
-  - rvm: 2.3.1
-    env: PUPPET_GEM_VERSION="~> 3.2.0"
-  - rvm: 2.3.1
-    env: PUPPET_GEM_VERSION="~> 3.3.0"
-  - rvm: 2.3.1
-    env: PUPPET_GEM_VERSION="~> 3.4.0"
-  - rvm: 2.3.1
-    env: PUPPET_GEM_VERSION="~> 3.5.0" STRICT_VARIABLES=yes
-  - rvm: 2.3.1
-    env: PUPPET_GEM_VERSION="~> 3.6.0" STRICT_VARIABLES=yes
-  - rvm: 2.3.1
-    env: PUPPET_GEM_VERSION="~> 3.7.0" STRICT_VARIABLES=yes
-  - rvm: 2.3.1
-    env: PUPPET_GEM_VERSION="~> 4"
-  # Ruby 2.3.2
-  - rvm: 2.3.2
-    env: PUPPET_GEM_VERSION="~> 2.7.0"
-  - rvm: 2.3.2
-    env: PUPPET_GEM_VERSION="~> 3.2.0"
-  - rvm: 2.3.2
-    env: PUPPET_GEM_VERSION="~> 3.3.0"
-  - rvm: 2.3.2
-    env: PUPPET_GEM_VERSION="~> 3.4.0"
-  - rvm: 2.3.2
-    env: PUPPET_GEM_VERSION="~> 3.5.0" STRICT_VARIABLES=yes
-  - rvm: 2.3.2
-    env: PUPPET_GEM_VERSION="~> 3.6.0" STRICT_VARIABLES=yes
-  - rvm: 2.3.2
-    env: PUPPET_GEM_VERSION="~> 3.7.0" STRICT_VARIABLES=yes
+  - rvm: 2.4.2
+    env: PUPPET_GEM_VERSION="~> 3.8.7" STRICT_VARIABLES=yes FUTURE_PARSER=yes
+  - rvm: 2.3.5
+    env: PUPPET_GEM_VERSION="~> 4" STRICT_VARIABLES=yes FUTURE_PARSER=yes
+  - rvm: 2.2.8
+    env: PUPPET_GEM_VERSION="~> 4" STRICT_VARIABLES=yes FUTURE_PARSER=yes
 
 build:
   pre_ci_boot:
     image_name: czhujer/shippable-c6ruby
-    image_tag: v0.4
+    image_tag: v0.5
     pull: true
     options: "-e HOME=/root"
 #
@@ -94,11 +33,16 @@ build:
     - rm Gemfile.lock || true
     - source /etc/profile.d/rvm.sh; rvm use $SHIPPABLE_RUBY
     - source /etc/profile.d/rvm.sh; bundle install $SHIPPABLE_BUNDLER_ARGS
+    # hack for disable monkeypatch in puppet 3.x
 #    - wget https://raw.githubusercontent.com/czhujer/docker-shippable-c6ruby/master/puppet-fix/syck_node_monkeypatch.rb -O /usr/local/rvm/gems/ruby-$SHIPPABLE_RUBY/gems/puppet-3.8.7/lib/puppet/vendor/safe_yaml/lib/safe_yaml/syck_node_monkeypatch.rb || true
 #    - PUPPET=`ls /usr/local/rvm/gems/ruby-$SHIPPABLE_RUBY/gems/puppet* -d|head -1 |awk '{split($0,a,"/"); print a[8]}' |tr '\n' ' ' |tr -d ' '`; wget https://raw.githubusercontent.com/czhujer/docker-shippable-c6ruby/master/puppet-fix/syck_node_monkeypatch.rb -O /usr/local/rvm/gems/ruby-$SHIPPABLE_RUBY/gems/$PUPPET/lib/puppet/vendor/safe_yaml/lib/safe_yaml/syck_node_monkeypatch.rb || true
     - PUPPET=`ls /usr/local/rvm/gems/ruby-$SHIPPABLE_RUBY/gems/puppet* -d|head -1 |awk '{split($0,a,"/"); print a[8]}' |tr '\n' ' ' |tr -d ' '`; [[ $PUPPET =~ ^puppet-3\.[0-9]\. ]] && wget https://raw.githubusercontent.com/czhujer/docker-shippable-c6ruby/master/puppet-fix/syck_node_monkeypatch.rb -O /usr/local/rvm/gems/ruby-$SHIPPABLE_RUBY/gems/$PUPPET/lib/puppet/vendor/safe_yaml/lib/safe_yaml/syck_node_monkeypatch.rb || true
     - rm -f /usr/bin/lsb_release
+    #fix paths for puppet 4
+    - rm -rf /etc/puppetlabs/code/modules; mkdir -p /etc/puppetlabs/code; ln -s /etc/puppet/modules/ /etc/puppetlabs/code/modules
+    # run tests
     - source /etc/profile.d/rvm.sh; bundle exec rake test
+    #check and install puppet modules over r10k
     - source /etc/profile.d/rvm.sh; bundle exec r10k puppetfile check -v
     - source /etc/profile.d/rvm.sh; r10k puppetfile install -v
     - mkdir /etc/puppet/modules/beats

@@ -14,11 +14,11 @@ class { '::beats':
   outputs_deep_merge => false,
   outputs_logstash   => {
 #    'filebeat' => { 'hosts' => [ 'logstash.example.com:5044' ], },
-    'metricbeat'  => { 'hosts' => [ 'logstash.example.com:5044' ],
-                      "use_tls" => true,
-                      "certificate_authorities" => ['/etc/ssl/certs/logstash-forwarder.crt'],
-                      "ssl_certificate" => '/etc/ssl/certs/logstash-forwarder.crt',
-                      "ssl_key" => '/etc/ssl/private/logstash-forwarder.key',
+    'metricbeat' => { 'hosts'                   => [ 'logstash.example.com:5044' ],
+                      'use_tls'                 => true,
+                      'certificate_authorities' => ['/etc/ssl/certs/logstash-forwarder.crt'],
+                      'ssl_certificate'         => '/etc/ssl/certs/logstash-forwarder.crt',
+                      'ssl_key'                 => '/etc/ssl/private/logstash-forwarder.key',
     },
   },
 }
@@ -26,15 +26,15 @@ class { '::beats':
 #include ::beats::topbeat
 class { '::beats::metricbeat':
   modules  => {
-                 'system' => { 'metricsets' => [ 'cpu', 'load', 'core', 'diskio', 'filesystem', 'memory', 'process'],
-                                   'enabled'  => true,
-                                   'period'   => '10s',
-                                   'processes' => "['.*']",
-                 },
-                 'nginx' => { 'metricsets' => ["nginx_stat"],
-                                   'enabled'  => true,
-                                   'period'   => '10s',
-                                   'hosts'    => ["https://127.0.0.1"],
-                 },
+                'system' => { 'metricsets' => [ 'cpu', 'load', 'core', 'diskio', 'filesystem', 'memory', 'process'],
+                              'enabled'    => true,
+                              'period'     => '10s',
+                              'processes'  => "['.*']",
+                },
+                'nginx'  => { 'metricsets' => ['nginx_stat'],
+                              'enabled'    => true,
+                              'period'     => '10s',
+                              'hosts'      => ['https://127.0.0.1'],
+                },
               },
 }

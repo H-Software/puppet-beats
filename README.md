@@ -3,18 +3,26 @@ Elastic beats puppet module
 =======
 License
 -------
-GPL v2 
+GPL v2
 
 ## WARNING ##
 
-* This module is under development. Most things work most of the time, mostly. 
-Some protocols and settings are still missing. 
+* This module is under development. Most things work most of the time, mostly.
+Some protocols and settings are still missing.
 
 * From module version 0.10.0 are unsupported beats < v5.x
 
 ## COMPATIBILITY ##
 
-* Filebeats & Metricbeat tested on CentOS 6 with puppet 3.8.7 & CentOS 7 with puppet 4.10
+* Filebeats & Metricbeat tested on:
+
+  * CentOS 6 with puppet 3.8.7, 4.10.x
+
+  * CentOS 7 with puppet 4.10
+
+  * Debian 9.x with puppet 4.10
+
+  * Ubuntu 16.04 with puppet 4.10
 
 * Minimally tested on Debian 7-9, Ubuntu 16.04 and puppet 3.8.7
 
@@ -36,8 +44,8 @@ class { 'beats':
 }
 
 class { 'beats::filebeat':
-    prospectors => { 
-              'syslog' => { 
+    prospectors => {
+              'syslog' => {
                   'document_type' => "syslog",
                   'paths'  => [ "/var/log/messages",
                                 "/var/log/secure",
@@ -117,5 +125,5 @@ include ::beats::filebeat
 }
 ```
 
-The ES output *should* work, but I've not tested it yet. 
+The ES output *should* work, but I've not tested it yet.
 Some digging around inside the module will be necessary to make bits work.

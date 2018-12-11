@@ -41,6 +41,7 @@ class beats (
   $redis_enabled         = false,
   $manage_geoip          = true,
   $version_v5            = true,
+  $manage_repo           = true,
 ){
 
   if (any2bool($version_v5) == false){
@@ -60,12 +61,24 @@ class beats (
 
   case $::osfamily {
     'RedHat': {
-      include ::beats::repo::yum, ::beats::package, ::beats::config
-      Class['beats::repo::yum'] -> Class['beats::package'] -> Class['beats::config']
+      if($manage_repo){
+        include ::beats::repo::yum, ::beats::package, ::beats::config
+        Class['beats::repo::yum'] -> Class['beats::package'] -> Class['beats::config']
+      }
+      else{
+        include ::beats::package, ::beats::config
+        Class['beats::package'] -> Class['beats::config']
+      }
     }
     'Debian': {
-      include ::beats::repo::apt, ::beats::package, ::beats::config
-      Class['beats::repo::apt'] -> Class['beats::package'] -> Class['beats::config']
+      if($manage_repo){
+        include ::beats::repo::apt, ::beats::package, ::beats::config
+        Class['beats::repo::apt'] -> Class['beats::package'] -> Class['beats::config']
+      }
+      else{
+        include ::beats::package, ::beats::config
+        Class['beats::package'] -> Class['beats::config']
+      }
     }
     default: {
       fail("${::osfamily} not supported yet")

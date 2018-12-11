@@ -12,7 +12,7 @@ mod 'apt',
 
 mod 'stdlib',
   :git => 'https://github.com/puppetlabs/puppetlabs-stdlib',
-  :tag => '4.12.0'
+  :tag => '4.25.0'
 
 mod 'rpmkey',
   :git => 'https://github.com/stschulte/puppet-rpmkey',
