@@ -6,6 +6,7 @@ class beats::filebeat (
   $registry_file = '/var/lib/filebeat/registry',
   $spool_size    = 1024,
   $version_v5    = $beats::version_v5,
+  $manage_repo   = $beats::manage_repo,
 ){
 
   if ($ensure == 'absent'){
@@ -15,6 +16,13 @@ class beats::filebeat (
   else{
     $service_ensure = $beats::ensure
     $service_enable = $beats::enable
+  }
+
+  if($manage_repo){
+    $require_repo = Yumrepo['elastic-beats'],
+  }
+  else {
+    $require_repo = []
   }
 
   if ($ensure != 'absent'){
@@ -31,7 +39,7 @@ class beats::filebeat (
     'RedHat': {
       package {'filebeat':
         ensure  => $ensure,
-        require => Yumrepo['elastic-beats'],
+        require => $require_repo,
       }
 
       if ($ensure == present or $ensure == 'present') {
