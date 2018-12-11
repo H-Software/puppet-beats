@@ -19,7 +19,7 @@ class beats::filebeat (
   }
 
   if($manage_repo){
-    $require_repo = Yumrepo['elastic-beats'],
+    $require_repo = Yumrepo['elastic-beats']
   }
   else {
     $require_repo = []
